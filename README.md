@@ -25,7 +25,7 @@ This implementation supports all parameter sets in the specification, and also t
 
 The implementation is self-contained in file ([uov.py](uov.py)). You will need Python3 with AES and SHAKE crypto primitives; try `pip3 install pycryptodome` if those are not installed.
 
-There is hardly any optimization as the main purpose of this implementation was to clarify the understanding of the implementation. However, the m-length vectors of finite field elements are expressed as a single Python integer in functions such as `gf_mulm`. This makes the code run faster, but I think it also makes the code more readable.
+There is hardly any optimization as the main purpose of this implementation was to clarify the understanding of the algorithm. However, the m-length vectors of finite field elements are expressed as a single Python integer in functions such as `gf_mulm`. This makes the code run faster, but I think it also makes the code more readable.
 
 Some [minor](https://github.com/pqov/pqov/issues/25) [modifications](https://github.com/pqov/pqov/issues/26) have been made to match the test vectors of the submission.
 
