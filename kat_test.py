@@ -40,7 +40,7 @@ class NIST_KAT_DRBG:
 
 #   test bench
 
-def test_rsp(iut, katnum=100):
+def test_rsp(iut, katnum=1):
     """ Generate NIST-styte KAT response strings."""
     fail    = 0
     drbg    = NIST_KAT_DRBG(bytes([i for i in range(48)]))

@@ -75,7 +75,7 @@ class UOV:
             self.sk_sz  =   (   self.seed_sk_sz + self.so_sz +      #   |esk|
                                 self.p1_sz  +   self.p2_sz  )
 
-    #   ranom & symmetric crypto hooks
+    #   random & symmetric crypto hooks
 
     def set_random(self, rbg):
         """ Set the key material RBG."""
@@ -228,24 +228,6 @@ class UOV:
                         m3[j][k] ^= u
                     else:
                         m3[k][j] ^= u
-        #   create p3
-        """
-        m3 = [ [ 0 ] * self.m for i in range(self.m) ]
-        for i in range(self.m):
-            for j in range(self.m):
-                u = 0
-                for k in range(self.v):
-                    t = 0
-                    for l in range(k, self.v):
-                        t  ^= self.gf_mulm( m1[k][l], mo[j][l] )
-                    u   ^= self.gf_mulm( t, mo[i][k] )
-                    u   ^= self.gf_mulm( m2[k][i], mo[j][k] )
-
-                if i < j:
-                    m3[i][j] ^= u
-                else:
-                    m3[j][i] ^= u
-        """
 
         #   create sks in place of m2
         for i in range(self.v):
