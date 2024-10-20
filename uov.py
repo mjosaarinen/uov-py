@@ -1,5 +1,5 @@
 #   uov.py
-#   2024-04-24  Markku-Juhani O. Saarinen < mjos@iki.fi>. See LICENSE
+#   2024-04-24  Markku-Juhani O. Saarinen <mjos@iki.fi>. See LICENSE
 
 #   === Implementation of UOV 1.0 ===
 

@@ -1,5 +1,5 @@
 #   kat_test.py
-#   2023-11-24  Markku-Juhani O. Saarinen < mjos@iki.fi>. See LICENSE
+#   2023-11-24  Markku-Juhani O. Saarinen <mjos@iki.fi>. See LICENSE
 
 from Crypto.Cipher import AES
 from Crypto.Hash import SHA256
