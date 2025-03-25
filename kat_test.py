@@ -71,6 +71,31 @@ def test_rsp(iut, katnum=1):
         print(f'test_rsp() fail= {fail}')
     return kat
 
+def print_param(iut):
+    """ for printing paramter tables """
+    param_name = {  (112, 44, 256)  : 'uov-Ip',
+                    (160, 64, 16)   : 'uov-Is',
+                    (184, 72, 256)  : 'uov-III',
+                    (244, 96, 256)  : 'uov-V'   }
+    name = iut.katname
+    key = ( iut.n, iut.m, iut.gf )
+    if key in param_name:
+        name = param_name[key]
+    if iut.pkc:
+        name += '-pkc'
+    if iut.skc:
+        name += '+skc'
+
+    s = '|'
+    s += f' {name:15} |'
+    s += f' {iut.gf:3} |'
+    s += f' {iut.n:3} |'
+    s += f' {iut.m:2} |'
+    s += f' {iut.pk_sz:7} |'
+    s += f' {iut.sk_sz:7} |'
+    s += f' {iut.sig_sz:3} |'
+    print(s)
+
 if (__name__ == "__main__"):
     katnum = 1                  #   change this
     for iut in uov_all:

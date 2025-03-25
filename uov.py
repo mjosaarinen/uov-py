@@ -22,11 +22,11 @@ class UOV:
         self.rbg    =   rbg                 #   randombytes() callback
 
         if pkc:                             #   variant names as in KAT files
-            kc = 'cpk'                      #   spec uses pkc/skc, KAT cpk/csk
+            kc = 'pkc'                      #   spec uses pkc/skc, KAT cpk/csk
         else:
             kc = 'classic'
         if skc:
-            kc += '-csk'
+            kc += '-skc'
         self.katname    =   f'OV({gf},{n},{m})-{kc}'
 
         if self.gf == 256:                  #   two kinds of Finite fields
@@ -70,7 +70,7 @@ class UOV:
             self.pk_sz  =   self.p1_sz + self.p2_sz + self.p3_sz    #   |epk|
 
         if  self.skc:
-            self.sk_sz  =   self.seed_pk_sz + self.seed_sk_sz       #   |csk|
+            self.sk_sz  =   self.seed_sk_sz                         #   |csk|
         else:
             self.sk_sz  =   (   self.seed_sk_sz + self.so_sz +      #   |esk|
                                 self.p1_sz  +   self.p2_sz  )
@@ -326,8 +326,9 @@ class UOV:
     def expand_sk(self, csk):
         """ UOV.ExpandSK(csk). """
         seed_sk     =   csk[:self.seed_sk_sz]
-        seed_pk     =   csk[self.seed_sk_sz:]
-        so          =   self.shake256(seed_sk, self.so_sz)
+        seed_pk_so  =   self.shake256(seed_sk, self.seed_pk_sz + self.so_sz)
+        seed_pk     =   seed_pk_so[:self.seed_pk_sz]
+        so          =   seed_pk_so[self.seed_pk_sz:]
         (p1, p2)    =   self.expand_p(seed_pk)
         (sks, p3)   =   self.calc_f2_p3(p1, p2, so)
         esk         =   seed_sk + so + p1 + sks
@@ -337,9 +338,11 @@ class UOV:
 
     def keygen(self):
         """ UOV.classic.KeyGen(). """
+
         seed_sk     =   self.rbg(self.seed_sk_sz)
-        seed_pk     =   self.rbg(self.seed_pk_sz)
-        so          =   self.shake256(seed_sk, self.so_sz)
+        seed_pk_so  =   self.shake256(seed_sk, self.seed_pk_sz + self.so_sz)
+        seed_pk     =   seed_pk_so[:self.seed_pk_sz]
+        so          =   seed_pk_so[self.seed_pk_sz:]
         (p1, p2)    =   self.expand_p(seed_pk)
         (sks, p3)   =   self.calc_f2_p3(p1, p2, so)
 
@@ -351,7 +354,7 @@ class UOV:
 
         #   secret key compression
         if  self.skc:
-            sk  =   seed_sk + seed_pk           #   csk
+            sk  =   seed_sk                     #   csk
         else:
             sk  =   seed_sk + so + p1 + sks     #   esk
 

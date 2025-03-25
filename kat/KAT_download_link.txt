@@ -1,0 +1,7 @@
+The KAT data of our UOV submission takes up to 1.5 GB. 
+Therefore, we would like to upload the KAT data online and share the download link as follows: 
+
+https://drive.google.com/file/d/1UJ4C6yAHXrNGpk6Xpzg8IkeNWVR4IbX1/view
+
+The UOV Team, 
+Feb 5, 2025. 
