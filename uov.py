@@ -5,12 +5,13 @@
 
 from Crypto.Cipher import AES
 from Crypto.Hash import SHAKE256
+import os
 
 class UOV:
 
     #   initialize
     def __init__(self, gf=256, n=112, m=44, pkc=False, skc=False, name='',
-                        rbg=None):
+                        rbg=os.urandom):
         """ Initialize the class with UOV parameters. """
         self.gf     =   gf                  #   _GFSIZE
         self.n      =   n                   #   _PUB_N
